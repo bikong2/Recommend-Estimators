@@ -140,7 +140,7 @@ if __name__ == "__main__":
     preproc.run(int_upper_bound=int_upper_bound, cat_min_occur=cat_min_occur)
 
     # 一分抽样后的小数据，快速测试用
-    preproc.split_save(prefix='small', test_ratio=0.2, sample_ratio=0.025)
+    #preproc.split_save(prefix='small', test_ratio=0.2, sample_ratio=0.025)
 
     # 全量数据
     preproc.split_save(prefix='whole', test_ratio=0.2, sample_ratio=1.0)

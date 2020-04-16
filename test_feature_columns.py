@@ -120,5 +120,5 @@ def test_weighted_cate_column():
 
 
 if __name__ == "__main__":
-    # test_cate_featcol_with_vocablist()
+    test_cate_featcol_with_vocablist()
     test_weighted_cate_column()

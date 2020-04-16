@@ -12,11 +12,13 @@ def test_load_field_multi_tokens():
         'col2': 3
     }
     col_defaults = [[''] for c in max_tokens.keys()]
+    print(col_defaults)
 
     # ------------- parse
     def _parse_tsv(line):
         columns = tf.decode_csv(line, record_defaults=col_defaults, field_delim='\t')
         tmp = dict(zip(max_tokens.keys(), columns))
+        print(tmp)
 
         features = {}
         for colname, max_pkgs_per_user in max_tokens.items():
@@ -27,11 +29,12 @@ def test_load_field_multi_tokens():
         return features
 
     # ------------- dataset
-    dataset = tf.data.TextLineDataset('dataset/test/test1.tsv').skip(1)  # skip the header
+    dataset = tf.data.TextLineDataset('dataset/test.csv').skip(1)  # skip the header
     dataset = dataset.map(_parse_tsv, num_parallel_calls=4)
 
-    dataset = dataset.apply(tf.contrib.data.dense_to_sparse_batch(batch_size=2,
-                                                                  row_shape=max_tokens))
+# TODO
+#    dataset = dataset.apply(tf.contrib.data.dense_to_sparse_batch(batch_size=2,
+#                                                                  row_shape=max_tokens))
 
 
 def test_parse_field_feature_value():
@@ -42,9 +45,11 @@ def test_parse_field_feature_value():
     # -------- prepare input
     segments = ['a:1,b:2', 'c:3,d:4,e:5']
     line = '\t'.join(segments)
+    print(line)
 
     # -------- define ops
 
 
 if __name__ == "__main__":
+    test_parse_field_feature_value()
     test_load_field_multi_tokens()
